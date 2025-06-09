@@ -22,21 +22,11 @@ spec:
       serviceAccountName: my-scheduler
       containers:
       - command:
-        - /usr/local/bin/kube-scheduler
+        - /usr/local/bin/ha-scheduler
         - --config=/etc/kubernetes/my-scheduler/my-scheduler-config.yaml
-        image: anshumantripathi/my-kube-scheduler:1.0-amd64
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 10259
-            scheme: HTTPS
-          initialDelaySeconds: 15
+        image: ha-scheduler:latest
+        imagePullPolicy: Never
         name: kube-second-scheduler
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 10259
-            scheme: HTTPS
         resources:
           requests:
             cpu: '0.1'
