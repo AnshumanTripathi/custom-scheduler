@@ -23,7 +23,6 @@ spec:
       containers:
       - command:
         - /usr/local/bin/ha-scheduler
-        - --config=/etc/kubernetes/my-scheduler/my-scheduler-config.yaml
         image: ha-scheduler:latest
         imagePullPolicy: Never
         name: kube-second-scheduler
@@ -32,12 +31,5 @@ spec:
             cpu: '0.1'
         securityContext:
           privileged: false
-        volumeMounts:
-          - name: config-volume
-            mountPath: /etc/kubernetes/my-scheduler
       hostNetwork: false
       hostPID: false
-      volumes:
-        - name: config-volume
-          configMap:
-            name: my-scheduler-config
